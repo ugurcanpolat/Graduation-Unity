@@ -1,0 +1,29 @@
+﻿<Properties StartupConfiguration="{35C37EDE-6936-CCD3-F51A-5BD7FBB9E3D1}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MainController.cs">
+    <Files>
+      <File FileName="Assets/Scripts/ServerModels/ModifyDataRequest.cs" Line="7" Column="2" />
+      <File FileName="Assets/Scripts/MainController.cs" Line="264" Column="94" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="graduation-2" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="ServerModels" expanded="True" />
+                <Node name="MainController.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="154fe8e8-4b01-455c-b0dc-c8f8ca2bf07c" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

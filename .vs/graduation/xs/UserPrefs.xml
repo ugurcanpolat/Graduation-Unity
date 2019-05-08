@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{539F47B5-0B56-F7C3-2B55-9FE90DC28D4E}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/ButtonHandler.cs">
+    <Files>
+      <File FileName="Assets/ButtonHandler.cs" Line="122" Column="36" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
