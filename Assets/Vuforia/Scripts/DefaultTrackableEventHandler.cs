@@ -24,7 +24,8 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
     protected TrackableBehaviour.Status m_NewStatus;
 
     #endregion // PROTECTED_MEMBER_VARIABLES
-
+    public GameObject mainCanvas;
+    public GameObject scanCanvas;
     #region UNITY_MONOBEHAVIOUR_METHODS
 
     protected virtual void Start()
@@ -83,6 +84,8 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
 
     protected virtual void OnTrackingFound()
     {
+        mainCanvas.SetActive(true);
+        scanCanvas.SetActive(false);
         var rendererComponents = GetComponentsInChildren<Renderer>(true);
         var colliderComponents = GetComponentsInChildren<Collider>(true);
         var canvasComponents = GetComponentsInChildren<Canvas>(true);

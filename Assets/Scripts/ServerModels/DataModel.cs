@@ -9,4 +9,6 @@ public class DataModel
     public string dataType;
     public bool modifiable;
     public List<object> values;
+    public Labels labels;
+    public string text;
 }

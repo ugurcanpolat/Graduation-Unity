@@ -7,8 +7,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -27,10 +29,13 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Text
     - UnityEngine.UI.Toggle
     Vuforia.UnityExtensions.dll:
+    - Vuforia.ImageTargetBehaviour
+    - Vuforia.TurnOffBehaviour
     - Vuforia.VuforiaBehaviour
     - Vuforia.VuforiaConfiguration
     VuforiaScripts.dll:
     - DefaultInitializationErrorHandler
+    - DefaultTrackableEventHandler
     com.unity.multiplayer-hlapi.Runtime.dll:
     - UnityEngine.Networking.NetworkCallbacks
     - UnityEngine.Networking.NetworkIdentity
@@ -115,15 +120,21 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9972}
     - Class: 114
+      Script: {instanceID: 10016}
+    - Class: 114
+      Script: {instanceID: 10038}
+    - Class: 114
       Script: {instanceID: 10046}
     - Class: 114
       Script: {instanceID: 10048}
     - Class: 114
       Script: {instanceID: 10400}
     - Class: 114
+      Script: {instanceID: 10560}
+    - Class: 114
       Script: {instanceID: 10690}
     - Class: 114
-      Script: {instanceID: 11060}
+      Script: {instanceID: 11062}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -687,7 +698,7 @@ ScriptsOnlyBuild:
     className: PanelButtonHandler
   - hash:
       serializedVersion: 2
-      Hash: abc7651d89847b7ae4dbbcc70b6240f1
+      Hash: bd95a3d8905ca4c6be45bffae8ebe87b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MainController
@@ -1161,7 +1172,7 @@ ScriptsOnlyBuild:
     className: NetworkStartPosition
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: aa052a1c8b9e2374578fbd5388e4118e
     assemblyName: VuforiaScripts.dll
     namespaceName: 
     className: DefaultTrackableEventHandler
@@ -1750,4 +1761,4 @@ ScriptsOnlyBuild:
   platform: 9
   scenePathNames:
   - Assets/Scenes/MainScene.unity
-  playerPath: /Users/ugurcanpolat/Downloads/graduation/graduation-2/ios-graduation
+  playerPath: /Users/ugurcanpolat/Downloads/iOS-graduation
