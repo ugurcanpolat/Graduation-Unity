@@ -20,8 +20,9 @@ public class MainController : MonoBehaviour
     public GameObject inputDropdownObject;
     public GameObject inputFieldObject;
     public GameObject inputTitleObject;
-    public GameObject ControlPanelObject;
-    public GameObject ControlButtonObject;
+    public GameObject controlPanelObject;
+    public GameObject controlButtonObject;
+    public GameObject toastMessageObject;
 
     private Animator controlPanelAnimator;
     private Animator controlButtonAnimator;
@@ -30,6 +31,7 @@ public class MainController : MonoBehaviour
     public List<GameObject> imageObjects;
     public List<GameObject> pieChartObjects;
     public List<GameObject> lineBarChartObjects;
+    public List<GameObject> modifyIconObjects;
 
     private List<Text> verticalTitleObjects;
     private List<Text> horizontalTitleObjects;
@@ -40,7 +42,9 @@ public class MainController : MonoBehaviour
     private List<RectTransform> labelTemplateX;
     private List<RectTransform> labelTemplateY;
 
-    private List<string> modifiableNames; 
+    private List<string> modifiableNames;
+
+    private Dictionary<int,int> modifiableLocationsDropdownIndexes;
 
     [SerializeField] public Sprite circleSprite;
 
@@ -59,10 +63,11 @@ public class MainController : MonoBehaviour
     {
         MakeAllObjectsHidden();
 
-        controlPanelAnimator = ControlPanelObject.GetComponent<Animator>();
-        controlButtonAnimator = ControlButtonObject.GetComponent<Animator>();
+        controlPanelAnimator = controlPanelObject.GetComponent<Animator>();
+        controlButtonAnimator = controlButtonObject.GetComponent<Animator>();
 
         modifiableNames = new List<string>();
+        modifiableLocationsDropdownIndexes = new Dictionary<int,int>();
 
         lineBarChartTransforms = new List<RectTransform>();
         labelTemplateX = new List<RectTransform>();
@@ -253,7 +258,7 @@ public class MainController : MonoBehaviour
             xIndex++;
         }
 
-        int seperatorCount = values.Count;
+        int seperatorCount = 5;
         for (int i = 0; i <= seperatorCount; i++)
         {
             RectTransform labelY = Instantiate(labelTemplateY[screenLocation]);
@@ -309,8 +314,10 @@ public class MainController : MonoBehaviour
             imageObjects[i].SetActive(false);
             pieChartObjects[i].SetActive(false);
             lineBarChartObjects[i].SetActive(false);
+            modifyIconObjects[i].SetActive(false);
 
             lineBarChartObjects[i].transform.parent.gameObject.SetActive(false);
+            textObjects[i].transform.parent.gameObject.GetComponent<Button>().interactable = false;
             textObjects[i].transform.parent.gameObject.SetActive(false);
         }
 
@@ -401,7 +408,7 @@ public class MainController : MonoBehaviour
             value = System.Convert.ToSingle(inputField.text),
             index = 0
         };
-  string jsonString = JsonConvert.SerializeObject(changeDataRequest);
+        string jsonString = JsonConvert.SerializeObject(changeDataRequest);
 
         UnityWebRequest request = UnityWebRequest.Put(url, 
                             System.Text.Encoding.Default.GetBytes(jsonString));
@@ -424,11 +431,13 @@ public class MainController : MonoBehaviour
             if (response.success)
             {
                 Debug.Log("Success: modifying server data.");
+                StartCoroutine(ShowToastMessage(response.message));
             }
             else
             {
                 Debug.Log("Fail: modifying server data.");
                 Debug.Log(response.errorMsg);
+                StartCoroutine(ShowToastMessage(response.errorMsg));
             }
         }
         else
@@ -436,8 +445,18 @@ public class MainController : MonoBehaviour
             Debug.Log("Fail: modifying server data");
             Debug.Log(request.responseCode);
             Debug.Log(request.error);
+            StartCoroutine(ShowToastMessage(request.error));
         }
         inputField.text = null;
+    }
+
+    private IEnumerator ShowToastMessage(string msg)
+    {
+        Debug.Log(msg);
+        toastMessageObject.GetComponentInChildren<Text>().text = msg;
+        toastMessageObject.SetActive(true);
+        yield return new WaitForSeconds(2);
+        toastMessageObject.SetActive(false);
     }
 
     public void RefreshButtonClicked()
@@ -570,6 +589,7 @@ public class MainController : MonoBehaviour
     private void UpdateInputDropdownAndInputField()
     {
         modifiableNames.Clear();
+        modifiableLocationsDropdownIndexes.Clear();
 
         switch (chartResponse.data[0].dataType)
         {
@@ -591,6 +611,17 @@ public class MainController : MonoBehaviour
             if (!chartResponse.data[i].modifiable) continue;
 
             modifiableNames.Add(chartResponse.data[i].name);
+
+            if (chartResponse.data[i].screenLocation >= 1 && 
+                chartResponse.data[i].screenLocation <= 4)
+            {
+                modifyIconObjects[chartResponse.data[i].screenLocation-1].SetActive(true);
+                modifyIconObjects[chartResponse.data[i].screenLocation - 1]
+                    .GetComponentInParent<Button>().interactable = true;
+                modifiableLocationsDropdownIndexes.Add(chartResponse.data[i].screenLocation, 
+                    modifiableLocationsDropdownIndexes.Count);
+
+            }
 
             System.Text.StringBuilder builder = new System.Text.StringBuilder();
             foreach (char c in chartResponse.data[i].name)
@@ -669,6 +700,10 @@ public class MainController : MonoBehaviour
             case "bar":
                 if (floatValues != null)
                 {
+                    horizontalTitleObjects[data.screenLocation - 1].text =
+                        data.labels.horizontal;
+                    verticalTitleObjects[data.screenLocation - 1].text =
+                        data.labels.vertical;
                     CreateBarChartObject(floatValues, data.screenLocation - 1);
                 }
                 break;
@@ -679,6 +714,21 @@ public class MainController : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    public void PanelClicked(int panel)
+    {
+
+        Debug.Log("Panel" + panel.ToString() + " has been clicked.");
+        inputDropdown.value = modifiableLocationsDropdownIndexes[panel];
+
+        if (controlPanelAnimator != null && controlButtonAnimator != null &&
+            modeDropdown.value != 2)
+        {
+            controlPanelAnimator.SetBool("hiding", false);
+            controlButtonAnimator.SetBool("hiding", false);
+        }
+
     }
 
     private void CreateTextObject(string text, int screenLocation)

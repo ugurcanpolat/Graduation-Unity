@@ -7,10 +7,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -698,7 +696,7 @@ ScriptsOnlyBuild:
     className: PanelButtonHandler
   - hash:
       serializedVersion: 2
-      Hash: bd95a3d8905ca4c6be45bffae8ebe87b
+      Hash: 5ee34245446686bf91c087eaf60928ce
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MainController
